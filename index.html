@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ganganagar Events</title>
+
+  <!-- GOOGLE FONTS -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- FONT AWESOME -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      scroll-behavior:smooth;
+    }
+
+    body{
+      font-family:'Poppins',sans-serif;
+      background:#050505;
+      color:white;
+      overflow-x:hidden;
+    }
+
+    h1,h2,h3{
+      font-family:'Cinzel',serif;
+    }
+
+    section{
+      padding:100px 8%;
+    }
+
+    /* NAVBAR */
+
+    nav{
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:20px 8%;
+      z-index:1000;
+      background:rgba(0,0,0,0.4);
+      backdrop-filter:blur(10px);
+    }
+
+    nav h2{
+      color:#ffd700;
+      font-size:30px;
+      letter-spacing:2px;
+    }
+
+    nav ul{
+      display:flex;
+      gap:30px;
+      list-style:none;
+    }
+
+    nav ul li a{
+      text-decoration:none;
+      color:white;
+      transition:0.4s;
+      font-size:15px;
+    }
+
+    nav ul li a:hover{
+      color:#ffd700;
+    }
+
+    /* HERO SECTION */
+
+    .hero{
+      height:100vh;
+      position:relative;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      overflow:hidden;
+
+      background:
+      linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.75)),
+      url('https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1800&auto=format&fit=crop');
+
+      background-size:cover;
+      background-position:center;
+      background-attachment:fixed;
+    }
+
+    .overlay{
+      position:absolute;
+      width:100%;
+      height:100%;
+      background:rgba(0,0,0,0.25);
+      z-index:-1;
+    }
+
+    .hero-content{
+      max-width:900px;
+      animation:fadeUp 1.5s ease;
+    }
+
+    .hero h1{
+      font-size:85px;
+      color:#ffd700;
+      margin-bottom:20px;
+      line-height:1.2;
+      text-shadow:0 0 30px rgba(255,215,0,0.3);
+    }
+
+    .hero p{
+      font-size:22px;
+      color:#f5f5f5;
+      margin-bottom:40px;
+      letter-spacing:2px;
+    }
+
+    .btns{
+      display:flex;
+      justify-content:center;
+      gap:20px;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      padding:16px 40px;
+      border-radius:50px;
+      border:none;
+      cursor:pointer;
+      font-size:16px;
+      transition:0.5s;
+    }
+
+    .gold-btn{
+      background:#ffd700;
+      color:black;
+      box-shadow:0 0 30px rgba(255,215,0,0.5);
+    }
+
+    .gold-btn:hover{
+      transform:translateY(-5px);
+      background:#fff;
+    }
+
+    .glass-btn{
+      background:rgba(255,255,255,0.1);
+      color:white;
+      backdrop-filter:blur(10px);
+      border:1px solid rgba(255,215,0,0.3);
+    }
+
+    .glass-btn:hover{
+      background:#ffd700;
+      color:black;
+    }
+
+    /* TITLES */
+
+    .title{
+      text-align:center;
+      margin-bottom:70px;
+    }
+
+    .title p{
+      letter-spacing:4px;
+      color:#c5a253;
+      text-transform:uppercase;
+      margin-bottom:10px;
+    }
+
+    .title h2{
+      font-size:55px;
+      color:#ffd700;
+    }
+
+    /* SERVICES */
+
+    .services-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:30px;
+    }
+
+    .service-card{
+      position:relative;
+      overflow:hidden;
+      border-radius:30px;
+      height:420px;
+      transition:0.6s;
+    }
+
+    .service-card img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      transition:0.7s;
+    }
+
+    .service-card:hover img{
+      transform:scale(1.1);
+    }
+
+    .service-overlay{
+      position:absolute;
+      inset:0;
+      background:linear-gradient(to top,rgba(0,0,0,0.95),rgba(0,0,0,0.2));
+      display:flex;
+      flex-direction:column;
+      justify-content:flex-end;
+      padding:30px;
+    }
+
+    .service-overlay i{
+      color:#ffd700;
+      font-size:40px;
+      margin-bottom:20px;
+    }
+
+    .service-overlay h3{
+      font-size:28px;
+      margin-bottom:10px;
+    }
+
+    .service-overlay p{
+      color:#ddd;
+      line-height:1.7;
+    }
+
+    .glass{
+      background:rgba(255,255,255,0.08);
+      backdrop-filter:blur(10px);
+      border:1px solid rgba(255,215,0,0.15);
+    }
+
+    /* GALLERY */
+
+    .gallery{
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      gap:26px;
+      align-items:start;
+    }
+
+    .gallery-card{
+      display:grid;
+      grid-template-rows:300px auto;
+      gap:16px;
+      margin:0;
+    }
+
+    .gallery-card img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      border-radius:22px;
+      border:1px solid rgba(255,215,0,0.18);
+      box-shadow:0 18px 45px rgba(0,0,0,0.35);
+      transition:0.5s;
+    }
+
+    .gallery-card figcaption{
+      text-align:center;
+      color:#f6d778;
+      font-family:'Cinzel',serif;
+      font-size:17px;
+      font-weight:600;
+      line-height:1.35;
+      letter-spacing:0.8px;
+      text-transform:capitalize;
+      text-shadow:0 8px 22px rgba(255,215,0,0.2);
+    }
+
+    .gallery-card:hover img{
+      transform:translateY(-8px) scale(1.02);
+      filter:brightness(1.1);
+      box-shadow:0 26px 60px rgba(255,215,0,0.16);
+    }
+
+    /* ABOUT */
+
+    .about{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(350px,1fr));
+      gap:50px;
+      align-items:center;
+    }
+
+    .about img{
+      width:100%;
+      border-radius:30px;
+    }
+
+    .about-text h2{
+      font-size:55px;
+      color:#ffd700;
+      margin-bottom:30px;
+    }
+
+    .about-text p{
+      line-height:1.9;
+      color:#ccc;
+      margin-bottom:30px;
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:20px;
+    }
+
+    .stat{
+      padding:25px;
+      border-radius:20px;
+      text-align:center;
+    }
+
+    .stat h3{
+      color:#ffd700;
+      font-size:40px;
+      margin-bottom:10px;
+    }
+
+    .stat p{
+      color:#ddd;
+    }
+
+    /* CONTACT */
+
+    .contact{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(350px,1fr));
+      gap:50px;
+    }
+
+    .contact-form{
+      padding:40px;
+      border-radius:30px;
+    }
+
+    .contact-form input,
+    .contact-form textarea{
+      width:100%;
+      padding:18px;
+      margin-bottom:20px;
+      border:none;
+      border-radius:15px;
+      background:rgba(255,255,255,0.08);
+      color:white;
+      border:1px solid rgba(255,215,0,0.2);
+      outline:none;
+    }
+
+    .contact-form textarea{
+      resize:none;
+    }
+
+    .form-status{
+      color:#ffd700;
+      font-size:14px;
+      line-height:1.6;
+      margin-top:15px;
+      min-height:22px;
+    }
+
+    footer{
+      text-align:center;
+      padding:40px;
+      border-top:1px solid rgba(255,215,0,0.1);
+      color:#aaa;
+    }
+
+    /* ANIMATIONS */
+
+    @keyframes fadeUp{
+      from{
+        opacity:0;
+        transform:translateY(50px);
+      }
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+
+    .reveal{
+      opacity:0;
+      transform:translateY(60px);
+      transition:1s;
+    }
+
+    .reveal.active{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    /* WHATSAPP BUTTON */
+
+    .whatsapp-btn{
+      position:fixed;
+      bottom:30px;
+      right:30px;
+      width:60px;
+      height:60px;
+      background:#25d366;
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      z-index:999;
+      cursor:pointer;
+      transition:0.4s;
+      box-shadow:0 0 30px rgba(37,211,102,0.4);
+      text-decoration:none;
+    }
+
+    .whatsapp-btn:hover{
+      transform:scale(1.1);
+      box-shadow:0 0 40px rgba(37,211,102,0.6);
+    }
+
+    .whatsapp-btn i{
+      color:white;
+      font-size:28px;
+    }
+
+    .whatsapp-quick{
+      background:#25d366;
+      color:white;
+    }
+
+    .whatsapp-quick:hover{
+      background:#1fb957;
+    }
+
+    /* RESPONSIVE */
+
+    @media(max-width:1024px){
+
+      .gallery{
+        grid-template-columns:repeat(2,1fr);
+      }
+
+      .gallery-card{
+        grid-template-rows:280px auto;
+      }
+
+      .gallery-card:last-child{
+        grid-column:1 / -1;
+        max-width:420px;
+        width:100%;
+        justify-self:center;
+      }
+
+      .gallery-card:last-child img{
+        height:280px;
+      }
+    }
+
+    @media(max-width:768px){
+
+      .hero h1{
+        font-size:48px;
+      }
+
+      nav{
+        flex-direction:column;
+        gap:20px;
+      }
+
+      nav ul{
+        gap:15px;
+        flex-wrap:wrap;
+        justify-content:center;
+      }
+
+      .title h2{
+        font-size:38px;
+      }
+
+      .about-text h2{
+        font-size:38px;
+      }
+
+      .hero p{
+        font-size:18px;
+      }
+
+      .gallery{
+        grid-template-columns:1fr;
+        gap:18px;
+      }
+
+      .gallery-card,
+      .gallery-card:last-child{
+        grid-column:auto;
+        max-width:none;
+        grid-template-rows:320px auto;
+      }
+
+      .whatsapp-btn{
+        bottom:20px;
+        right:20px;
+        width:50px;
+        height:50px;
+      }
+
+      .whatsapp-btn i{
+        font-size:24px;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+
+  <nav>
+
+    <h2>Ganganagar Events</h2>
+
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+
+  </nav>
+
+  <!-- HERO -->
+
+  <section class="hero">
+
+    <div class="overlay"></div>
+
+    <div class="hero-content">
+
+      <h1>Crafting Royal Celebrations</h1>
+
+      <p>
+        Luxury Weddings • Catering • Entertainment • Grand Events
+      </p>
+
+      <div class="btns">
+        <button class="btn gold-btn" onclick="bookEvent()">Plan Your Event</button>
+        <button class="btn glass-btn" onclick="openWhatsapp()">Book on WhatsApp</button>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- SERVICES -->
+
+  <section id="services" class="reveal">
+
+    <div class="title">
+      <p>Premium Services</p>
+      <h2>Luxury Event Experiences</h2>
+    </div>
+
+    <div class="services-grid">
+
+      <div class="service-card glass">
+
+        <img src="assets/outdoor-catering.jpg" alt="Outdoor Indian wedding catering buffet with warm lights">
+
+        <div class="service-overlay">
+          <i class="fas fa-utensils"></i>
+          <h3>Catering Services</h3>
+          <p>Luxury dining experiences for unforgettable celebrations.</p>
+        </div>
+
+      </div>
+
+      <div class="service-card glass">
+
+        <img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?q=80&w=1200&auto=format&fit=crop">
+
+        <div class="service-overlay">
+          <i class="fas fa-ring"></i>
+          <h3>Wedding Planning</h3>
+          <p>Elegant cinematic weddings inspired by royal aesthetics.</p>
+        </div>
+
+      </div>
+
+      <div class="service-card glass">
+
+        <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=1200&auto=format&fit=crop">
+
+        <div class="service-overlay">
+          <i class="fas fa-music"></i>
+          <h3>DJ & Lighting</h3>
+          <p>Immersive sound systems and premium lighting concepts.</p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- GALLERY -->
+
+  <section id="gallery" class="reveal">
+
+    <div class="title">
+      <p>Our Services</p>
+      <h2>Our Services</h2>
+    </div>
+
+    <div class="gallery">
+
+      <figure class="gallery-card">
+        <img src="assets/outdoor-catering.jpg" alt="Outdoor Indian wedding catering buffet with warm lights" title="Outdoor Wedding Catering">
+        <figcaption>Catering with Waiters</figcaption>
+      </figure>
+
+      <figure class="gallery-card">
+        <img src="assets/baraat-fireworks.jpg" alt="Groom on decorated baraat carriage with fireworks and confetti" title="Baraat Fireworks Celebration">
+        <figcaption>Grand Welcome</figcaption>
+      </figure>
+
+      <figure class="gallery-card">
+        <img src="assets/umbrella-lights.jpg" alt="Glowing umbrella light installation for a wedding event" title="Umbrella Lighting Installation">
+        <figcaption>Umbrella Lighting for Wedding</figcaption>
+      </figure>
+
+      <figure class="gallery-card">
+        <img src="assets/paper-shot.jpg" alt="Paper shot confetti celebration at a wedding event" title="Paper Shot">
+        <figcaption>Smoke & DJ Effects</figcaption>
+      </figure>
+
+      <figure class="gallery-card">
+        <img src="assets/teddy-doll.jpg" alt="Teddy doll decoration wall for an event" title="teddy Doll">
+        <figcaption>teddy Doll</figcaption>
+      </figure>
+
+    </div>
+
+  </section>
+
+  <!-- ABOUT -->
+
+  <section id="about" class="reveal">
+
+    <div class="about">
+
+      <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=1200&auto=format&fit=crop">
+
+      <div class="about-text">
+
+        <h2>We Create Experiences Beyond Imagination</h2>
+
+        <p>
+          Ganganagar Events specializes in luxury weddings,
+          premium catering, flower decorations, grand entries,
+          entertainment, DJ setups, and cinematic event experiences
+          inspired by elite Indian wedding aesthetics.
+        </p>
+
+        <div class="stats">
+
+          <div class="stat glass">
+            <h3>500+</h3>
+            <p>Luxury Events</p>
+          </div>
+
+          <div class="stat glass">
+            <h3>1000+</h3>
+            <p>Happy Families</p>
+          </div>
+
+          <div class="stat glass">
+            <h3>15+</h3>
+            <p>Years Experience</p>
+          </div>
+
+          <div class="stat glass">
+            <h3>24/7</h3>
+            <p>Premium Support</p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- CONTACT -->
+
+  <section id="contact" class="reveal">
+
+    <div class="contact">
+
+      <div>
+
+        <div class="title" style="text-align:left;">
+          <p>Contact Us</p>
+          <h2>Let's Create Your Dream Celebration</h2>
+        </div>
+
+        <p style="color:#ccc;line-height:1.9;">
+          Contact Ganganagar Events for luxury weddings,
+          catering, hospitality, entertainment,
+          and unforgettable celebrations.
+        </p>
+
+      </div>
+
+      <form class="contact-form glass" id="contactForm">
+
+        <input type="text" id="name" placeholder="Your Name" required>
+
+        <input type="email" id="email" placeholder="Email Address" required>
+
+        <textarea rows="5" id="message" placeholder="Tell us about your event" required></textarea>
+
+        <button class="btn gold-btn" style="width:100%;margin-bottom:15px;" type="submit">
+          Send Inquiry
+        </button>
+
+        <button class="btn whatsapp-quick" style="width:100%;" type="button" onclick="openWhatsapp()">
+          <i class="fab fa-whatsapp" style="margin-right:8px;"></i>Book on WhatsApp
+        </button>
+
+        <p class="form-status" id="formStatus" aria-live="polite"></p>
+
+      </form>
+
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+
+  <footer>
+    © 2026 Ganganagar Events • Luxury Wedding Experiences
+  </footer>
+
+  <!-- WHATSAPP BUTTON -->
+
+  <a href="https://wa.me/6305601404?text=Hi%20Ganganagar%20Events%21%20I%27m%20interested%20in%20booking%20an%20event.%20Please%20share%20your%20services%20and%20availability.%20Thank%20you%21" class="whatsapp-btn" target="_blank" rel="noopener noreferrer" title="Chat on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <!-- JAVASCRIPT -->
+
+  <script>
+
+    // WHATSAPP NUMBER - Update this with your business WhatsApp number
+    const WHATSAPP_NUMBER = '6305601404'; // Format: country code + number without +
+    const BUSINESS_EMAIL = 'eslavathgangadhar9@gmail.com';
+
+    function reveal(){
+
+      let reveals = document.querySelectorAll('.reveal');
+
+      for(let i = 0; i < reveals.length; i++){
+
+        let windowHeight = window.innerHeight;
+
+        let revealTop = reveals[i].getBoundingClientRect().top;
+
+        let revealPoint = 100;
+
+        if(revealTop < windowHeight - revealPoint){
+          reveals[i].classList.add('active');
+        }
+
+      }
+
+    }
+
+    window.addEventListener('scroll', reveal);
+
+    // WHATSAPP BOOKING FUNCTION
+    function openWhatsapp() {
+      const message = "Hi Ganganagar Events! I'm interested in booking an event. Please share your services and availability. Thank you!";
+      const encodedMessage = encodeURIComponent(message);
+      const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
+      window.open(whatsappUrl, '_blank');
+    }
+
+    // BOOK EVENT FUNCTION
+    function bookEvent() {
+      document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    const contactForm = document.getElementById('contactForm');
+    const formStatus = document.getElementById('formStatus');
+
+    contactForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
+
+      if(!name || !email || !message){
+        formStatus.textContent = 'Please fill all fields before sending.';
+        return;
+      }
+
+      const subject = `New event inquiry from ${name}`;
+      const body = [
+        `Name: ${name}`,
+        `Email: ${email}`,
+        '',
+        'Event Details:',
+        message
+      ].join('\n');
+
+      window.location.href = `mailto:${BUSINESS_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      formStatus.textContent = 'Opening your email app with the inquiry ready to send.';
+    });
+
+  </script>
+
+</body>
+</html>
